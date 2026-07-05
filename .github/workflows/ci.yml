@@ -4,8 +4,10 @@ on:
     branches:
       - master
 jobs:
-  checkout-and-print-tree:
+  run-selenoid-tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Run docker compose app
-        run: docker compose up --build -d
+      - name: Check out repository code  
+        uses: actions/checkout@v3 
+      - name: Run tests in docker
+        run: docker compose up --build --exit-code-from test_docker 
